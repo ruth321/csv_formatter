@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
-	"log"
 	"os"
 	"strconv"
 	"time"
@@ -22,7 +21,7 @@ type BQOrderRaw struct {
 	Source             string    `json:"source"`               //источник заказа
 	OrderState         string    `json:"order_state"`          //тип завершения заказа
 	CancelReason       string    `json:"cancel_reason"`        //причина отмены
-	OrderTakenTime     time.Time `json:"arrival_real_time"`    //время когда заказ был взят
+	OrderTakenTime     time.Time `json:"order_taken_time"`     //время когда заказ был взят
 	ArrivalTimeReal    time.Time `json:"arrival_real_time"`    //время прибытия по факту
 	ArrivalTimePromise time.Time `json:"arrival_promise_time"` //обещанное время (сек)
 	DistanceToClient   float64   `json:"distance_to_client"`   //растояние до клиента
@@ -95,13 +94,16 @@ type OrderEventData struct {
 func main() {
 	file, err := os.Open("main.csv")
 	if err != nil {
-		log.Fatal(err)
+		logrus.WithField("event", "csv file opening").Fatal(err)
 	}
-	defer file.Close()
 	r := csv.NewReader(file)
+	err = file.Close()
+	if err != nil {
+		logrus.WithField("event", "csv file closing").Fatal(err)
+	}
 	csvOrders, err := r.ReadAll()
 	if err != nil {
-		log.Fatal(err)
+		logrus.WithField("event", "reading from csv reader").Fatal(err)
 	}
 	var order BQOrderRaw
 	for i := 1; i < len(csvOrders); i++ {
@@ -213,10 +215,4 @@ func TimeParser(strTime string) (time.Time, error) {
 	layout := "2006-01-02 15:04:05.999999-07"
 	timeTime, err := time.Parse(layout, strTime)
 	return timeTime, err
-}
-
-func checkErr(err error, orderField string, event string, csvField string) {
-	if err != nil {
-		logrus.WithFields(logrus.Fields{"order field": orderField, "event": event, "csv field": csvField}).Fatal(err)
-	}
 }
