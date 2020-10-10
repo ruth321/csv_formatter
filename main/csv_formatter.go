@@ -99,43 +99,50 @@ func main() {
 	}
 	defer file.Close()
 	r := csv.NewReader(file)
-	records, err := r.ReadAll()
+	csvOrders, err := r.ReadAll()
 	if err != nil {
 		log.Fatal(err)
 	}
 	var order BQOrderRaw
-	layout := "2006-01-02 15:04:05.999999-07"
-	for i := 1; i < len(records); i++ {
-		createdDatetime, err := time.Parse(layout, records[i][5])
+	for i := 1; i < len(csvOrders); i++ {
+		createdDatetime, err := TimeParser(csvOrders[i][5])
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"order field": "CreatedDatetime", "event": "time parsing", "csv field": "createtime"}).Fatal(err)
 		}
-		dropoffLon, err := strconv.ParseFloat(records[i][60], 32)
+		dropoffLon, err := strconv.ParseFloat(csvOrders[i][60], 32)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"order field": "DropoffLon", "event": "float parsing", "csv field": "longitudeto"}).Fatal(err)
 		}
-		dropoffLat, err := strconv.ParseFloat(records[i][59], 32)
+		dropoffLat, err := strconv.ParseFloat(csvOrders[i][59], 32)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"order field": "DropoffLat", "event": "float parsing", "csv field": "latitudeto"}).Fatal(err)
 		}
-		pickupLon, err := strconv.ParseFloat(records[i][27], 32)
+		pickupLon, err := strconv.ParseFloat(csvOrders[i][27], 32)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"order field": "PickupLon", "event": "float parsing", "csv field": "longitude"}).Fatal(err)
 		}
-		pickupLat, err := strconv.ParseFloat(records[i][26], 32)
+		pickupLat, err := strconv.ParseFloat(csvOrders[i][26], 32)
 		if err != nil {
 			logrus.WithFields(logrus.Fields{"order field": "PickupLat", "event": "float parsing", "csv field": "latitude"}).Fatal(err)
 		}
+		orderTakenTime, err := TimeParser(csvOrders[i][73])
+		if err != nil {
+			logrus.WithFields(logrus.Fields{"order field": "OrderTakenTime", "event": "time parsing", "csv field": "appointtime"}).Fatal(err)
+		}
+		paymentType := "Картой"
+		if csvOrders[i][64] == "f" {
+			paymentType = "Наличные"
+		}
 		order = BQOrderRaw{
-			UUID:               records[i][0], //idx
+			UUID:               csvOrders[i][0], //idx
 			RoutesCount:        0,
 			ServiceName:        "",
 			Features:           "",
 			CreatedDatetime:    createdDatetime, //createtime
 			Source:             "",
-			OrderState:         records[i][50], //state
+			OrderState:         csvOrders[i][50], //state
 			CancelReason:       "",
-			OrderTakenTime:     time.Time{},
+			OrderTakenTime:     orderTakenTime, //appointtime
 			ArrivalTimeReal:    time.Time{},
 			ArrivalTimePromise: time.Time{},
 			DistanceToClient:   0,
@@ -148,12 +155,12 @@ func main() {
 			PickupLat:          float32(pickupLat), //latitude
 			PickupDatetime:     time.Time{},
 			PickupArea:         "",
-			PickupAddress:      records[i][2],       //addressfrom
+			PickupAddress:      csvOrders[i][2],     //addressfrom
 			DropoffLon:         float32(dropoffLon), //longitudeto
 			DropoffLat:         float32(dropoffLat), //latitudeto
 			DropoffDatetime:    time.Time{},
 			DropoffArea:        "",
-			DropoffAddress:     records[i][4], //addressto
+			DropoffAddress:     csvOrders[i][33], //addresstofull
 			TariffName:         "",
 			TariffPrice:        0,
 			RealPrice:          0,
@@ -165,9 +172,9 @@ func main() {
 			DriverUUID:         "",
 			DriverCar:          "",
 			DriverTarrif:       "",
-			ClientPhone:        records[i][24], //aclientphone
-			ClientUUID:         "",
-			PaymentType:        "",
+			ClientPhone:        csvOrders[i][24], //aclientphone
+			ClientUUID:         csvOrders[i][1],  //clientid
+			PaymentType:        paymentType,      //withcardpayment
 			StoreUUID:          "",
 			ProductsSum:        0,
 			ProductsCount:      0,
@@ -178,6 +185,9 @@ func main() {
 		ordersDirPath := "orders"
 		createdYear := strconv.Itoa(createdDatetime.Year())
 		createdMonth := strconv.Itoa(int(createdDatetime.Month()))
+		if int(createdDatetime.Month()) < 10 {
+			createdMonth = "0" + createdMonth
+		}
 		createdDay := strconv.Itoa(createdDatetime.Day())
 		savingPath := fmt.Sprintf("%s/%s/%s/%s/", ordersDirPath, createdYear, createdMonth, createdDay)
 		err = os.MkdirAll(savingPath, os.ModePerm)
@@ -194,6 +204,15 @@ func main() {
 			logrus.WithField("event", "saving order file").Fatal(err)
 		}
 	}
+}
+
+func TimeParser(strTime string) (time.Time, error) {
+	if strTime == "" {
+		return time.Time{}, nil
+	}
+	layout := "2006-01-02 15:04:05.999999-07"
+	timeTime, err := time.Parse(layout, strTime)
+	return timeTime, err
 }
 
 func checkErr(err error, orderField string, event string, csvField string) {
