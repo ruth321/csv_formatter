@@ -97,13 +97,13 @@ func main() {
 		logrus.WithField("event", "csv file opening").Fatal(err)
 	}
 	r := csv.NewReader(file)
-	err = file.Close()
-	if err != nil {
-		logrus.WithField("event", "csv file closing").Fatal(err)
-	}
 	csvOrders, err := r.ReadAll()
 	if err != nil {
 		logrus.WithField("event", "reading from csv reader").Fatal(err)
+	}
+	err = file.Close()
+	if err != nil {
+		logrus.WithField("event", "csv file closing").Fatal(err)
 	}
 	var order BQOrderRaw
 	for i := 1; i < len(csvOrders); i++ {
