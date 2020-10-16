@@ -135,12 +135,19 @@ func main() {
 		if csvOrders[i][64] == "f" {
 			paymentType = "Наличные"
 		}
+		waitingTime, err := IntegerParser(csvOrders[i][16])
+		if err != nil {
+			logrus.WithFields(logrus.Fields{"order field": "WaitingTime", "event": "int parsing", "csv field": "waiting"}).Fatal(err)
+		}
+		waitingTime *= 60
+		//TODO спросить про csv поле stoimost
+		//TODO спросить про название папки day
 		order = BQOrderRaw{
 			UUID:               csvOrders[i][0], //idx
 			RoutesCount:        0,
 			ServiceName:        "",
-			Features:           "",
-			CreatedDatetime:    createdDatetime, //createtime
+			Features:           csvOrders[i][48], //feauteres
+			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "",
 			OrderState:         csvOrders[i][50], //state
 			CancelReason:       "",
@@ -166,7 +173,7 @@ func main() {
 			TariffName:         "",
 			TariffPrice:        0,
 			RealPrice:          0,
-			WaitingTime:        0,
+			WaitingTime:        waitingTime, //*waiting
 			WaitingPrice:       0,
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
@@ -176,7 +183,7 @@ func main() {
 			DriverTarrif:       "",
 			ClientPhone:        csvOrders[i][24], //aclientphone
 			ClientUUID:         csvOrders[i][1],  //clientid
-			PaymentType:        paymentType,      //withcardpayment
+			PaymentType:        paymentType,      //*withcardpayment
 			StoreUUID:          "",
 			ProductsSum:        0,
 			ProductsCount:      0,
@@ -215,4 +222,12 @@ func TimeParser(strTime string) (time.Time, error) {
 	layout := "2006-01-02 15:04:05.999999-07"
 	timeTime, err := time.Parse(layout, strTime)
 	return timeTime, err
+}
+
+func IntegerParser(intStr string) (int, error) {
+	if intStr == "" {
+		return 0, nil
+	}
+	intInt, err := strconv.Atoi(intStr)
+	return intInt, err
 }
