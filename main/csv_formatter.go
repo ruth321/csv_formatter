@@ -107,33 +107,36 @@ func main() {
 	}
 	var order BQOrderRaw
 	for i := 1; i < len(csvOrders); i++ {
-		createdDatetime, err := TimeParser(csvOrders[i][5])
+		createdDatetime, err := timeParser(csvOrders[i][5])
 		errorHandler(err, "CreatedDatetime", "time parsing", "createtime")
-		dropoffLon, err := strconv.ParseFloat(csvOrders[i][60], 32)
+		dropoffLon, err := floatParser(csvOrders[i][60])
 		errorHandler(err, "DropoffLon", "float parsing", "longitudeto")
-		dropoffLat, err := strconv.ParseFloat(csvOrders[i][59], 32)
+		dropoffLat, err := floatParser(csvOrders[i][59])
 		errorHandler(err, "DropoffLat", "float parsing", "latitudeto")
-		pickupLon, err := strconv.ParseFloat(csvOrders[i][27], 32)
+		pickupLon, err := floatParser(csvOrders[i][27])
 		errorHandler(err, "PickupLon", "float parsing", "longitude")
-		pickupLat, err := strconv.ParseFloat(csvOrders[i][26], 32)
+		pickupLat, err := floatParser(csvOrders[i][26])
 		errorHandler(err, "PickupLat", "float parsing", "latitude")
-		orderTakenTime, err := TimeParser(csvOrders[i][73])
+		orderTakenTime, err := timeParser(csvOrders[i][73])
 		errorHandler(err, "OrderTakenTime", "time parsing", "appointtime")
 		paymentType := "Картой"
 		if csvOrders[i][64] == "f" {
 			paymentType = "Наличные"
 		}
-		waitingTime, err := IntegerParser(csvOrders[i][16])
+		waitingTime, err := intParser(csvOrders[i][16])
 		errorHandler(err, "WaitingTime", "int parsing", "waiting")
 		waitingTime *= 60
-		dropoffDatetime, err := TimeParser(csvOrders[i][79])
+		dropoffDatetime, err := timeParser(csvOrders[i][79])
 		errorHandler(err, "DropoffDatetime", "time parsing", "s_time_stop_taxometr")
-		//TODO спросить про csv поле stoimost
-		//TODO спросить про название папки day
+		tariffPrice, err := intParser(csvOrders[i][36])
+		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
+		//TODO спросить про Source
+		//TODO спросить про ввод файла
+		//TODO спросить про TariffName и DriverTarrif
 		order = BQOrderRaw{
 			UUID:               csvOrders[i][0], //idx
 			RoutesCount:        0,
-			ServiceName:        csvOrders[i][40], //orderoptionid
+			ServiceName:        csvOrders[i][40], //?orderoptionid
 			Features:           csvOrders[i][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "",
@@ -148,30 +151,30 @@ func main() {
 			OwnerUUID:          "",
 			UserStartName:      "",
 			UserStartUUID:      "",
-			PickupLon:          float32(pickupLon), //longitude
-			PickupLat:          float32(pickupLat), //latitude
+			PickupLon:          pickupLon, //longitude
+			PickupLat:          pickupLat, //latitude
 			PickupDatetime:     time.Time{},
 			PickupArea:         "",
-			PickupAddress:      csvOrders[i][2],     //addressfrom
-			DropoffLon:         float32(dropoffLon), //longitudeto
-			DropoffLat:         float32(dropoffLat), //latitudeto
-			DropoffDatetime:    dropoffDatetime,     //s_time_stop_taxometr
+			PickupAddress:      csvOrders[i][2], //addressfrom
+			DropoffLon:         dropoffLon,      //longitudeto
+			DropoffLat:         dropoffLat,      //latitudeto
+			DropoffDatetime:    dropoffDatetime, //s_time_stop_taxometr
 			DropoffArea:        "",
 			DropoffAddress:     csvOrders[i][33], //addresstofull
 			TariffName:         "",
-			TariffPrice:        0,
+			TariffPrice:        tariffPrice, //stoimost_tarif
 			RealPrice:          0,
-			WaitingTime:        waitingTime, //*waiting
+			WaitingTime:        waitingTime, //waiting
 			WaitingPrice:       0,
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
 			ClientAllowance:    0,
-			DriverUUID:         "",
+			DriverUUID:         csvOrders[i][82], //adriverid
 			DriverCar:          "",
 			DriverTarrif:       "",
 			ClientPhone:        csvOrders[i][24], //aclientphone
 			ClientUUID:         csvOrders[i][1],  //clientid
-			PaymentType:        paymentType,      //*withcardpayment
+			PaymentType:        paymentType,      //withcardpayment
 			StoreUUID:          "",
 			ProductsSum:        0,
 			ProductsCount:      0,
@@ -186,6 +189,9 @@ func main() {
 			createdMonth = "0" + createdMonth
 		}
 		createdDay := strconv.Itoa(createdDatetime.Day())
+		if createdDatetime.Day() < 10 {
+			createdDay = "0" + createdDay
+		}
 		savingPath := fmt.Sprintf("%s/%s/%s/%s/", ordersDirPath, createdYear, createdMonth, createdDay)
 		err = os.MkdirAll(savingPath, os.ModePerm)
 		if err != nil {
@@ -203,7 +209,7 @@ func main() {
 	}
 }
 
-func TimeParser(strTime string) (time.Time, error) {
+func timeParser(strTime string) (time.Time, error) {
 	if strTime == "" {
 		return time.Time{}, nil
 	}
@@ -212,12 +218,20 @@ func TimeParser(strTime string) (time.Time, error) {
 	return timeTime, err
 }
 
-func IntegerParser(intStr string) (int, error) {
+func intParser(intStr string) (int, error) {
 	if intStr == "" {
 		return 0, nil
 	}
 	intInt, err := strconv.Atoi(intStr)
 	return intInt, err
+}
+
+func floatParser(floatStr string) (float32, error) {
+	if floatStr == "" {
+		return 0, nil
+	}
+	floatFloat, err := strconv.ParseFloat(floatStr, 32)
+	return float32(floatFloat), err
 }
 
 func errorHandler(err error, jsonField string, event string, csvField string) {

@@ -1,0 +1,9 @@
+1. Значения чисел из orderoptionid
+2. Что значит predvartime
+3. Что значит completetime (в описании 'Выполнение заказа')
+4. Какое из полей (stoimost_fix, stoimost_calcroute, stoimost_taxometr, stoimost) можно присвоить к RealPrice (цена по факту)
+5. Значения чисел из tariffid
+6. Значения чисел из rayonid, rayontoid
+7. Что возвращает paid_time
+8. Что возвращает avehicleid
+9. Что возвращает feauteres
