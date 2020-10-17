@@ -108,44 +108,32 @@ func main() {
 	var order BQOrderRaw
 	for i := 1; i < len(csvOrders); i++ {
 		createdDatetime, err := TimeParser(csvOrders[i][5])
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "CreatedDatetime", "event": "time parsing", "csv field": "createtime"}).Fatal(err)
-		}
+		errorHandler(err, "CreatedDatetime", "time parsing", "createtime")
 		dropoffLon, err := strconv.ParseFloat(csvOrders[i][60], 32)
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "DropoffLon", "event": "float parsing", "csv field": "longitudeto"}).Fatal(err)
-		}
+		errorHandler(err, "DropoffLon", "float parsing", "longitudeto")
 		dropoffLat, err := strconv.ParseFloat(csvOrders[i][59], 32)
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "DropoffLat", "event": "float parsing", "csv field": "latitudeto"}).Fatal(err)
-		}
+		errorHandler(err, "DropoffLat", "float parsing", "latitudeto")
 		pickupLon, err := strconv.ParseFloat(csvOrders[i][27], 32)
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "PickupLon", "event": "float parsing", "csv field": "longitude"}).Fatal(err)
-		}
+		errorHandler(err, "PickupLon", "float parsing", "longitude")
 		pickupLat, err := strconv.ParseFloat(csvOrders[i][26], 32)
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "PickupLat", "event": "float parsing", "csv field": "latitude"}).Fatal(err)
-		}
+		errorHandler(err, "PickupLat", "float parsing", "latitude")
 		orderTakenTime, err := TimeParser(csvOrders[i][73])
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "OrderTakenTime", "event": "time parsing", "csv field": "appointtime"}).Fatal(err)
-		}
+		errorHandler(err, "OrderTakenTime", "time parsing", "appointtime")
 		paymentType := "Картой"
 		if csvOrders[i][64] == "f" {
 			paymentType = "Наличные"
 		}
 		waitingTime, err := IntegerParser(csvOrders[i][16])
-		if err != nil {
-			logrus.WithFields(logrus.Fields{"order field": "WaitingTime", "event": "int parsing", "csv field": "waiting"}).Fatal(err)
-		}
+		errorHandler(err, "WaitingTime", "int parsing", "waiting")
 		waitingTime *= 60
+		dropoffDatetime, err := TimeParser(csvOrders[i][79])
+		errorHandler(err, "DropoffDatetime", "time parsing", "s_time_stop_taxometr")
 		//TODO спросить про csv поле stoimost
 		//TODO спросить про название папки day
 		order = BQOrderRaw{
 			UUID:               csvOrders[i][0], //idx
 			RoutesCount:        0,
-			ServiceName:        "",
+			ServiceName:        csvOrders[i][40], //orderoptionid
 			Features:           csvOrders[i][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "",
@@ -167,7 +155,7 @@ func main() {
 			PickupAddress:      csvOrders[i][2],     //addressfrom
 			DropoffLon:         float32(dropoffLon), //longitudeto
 			DropoffLat:         float32(dropoffLat), //latitudeto
-			DropoffDatetime:    time.Time{},
+			DropoffDatetime:    dropoffDatetime,     //s_time_stop_taxometr
 			DropoffArea:        "",
 			DropoffAddress:     csvOrders[i][33], //addresstofull
 			TariffName:         "",
@@ -230,4 +218,10 @@ func IntegerParser(intStr string) (int, error) {
 	}
 	intInt, err := strconv.Atoi(intStr)
 	return intInt, err
+}
+
+func errorHandler(err error, jsonField string, event string, csvField string) {
+	if err != nil {
+		logrus.WithFields(logrus.Fields{"json field": jsonField, "event": event, "csv field": csvField}).Fatal(err)
+	}
 }
