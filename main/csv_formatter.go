@@ -75,22 +75,6 @@ type BQOrderRaw struct {
 
 	//insert datetime
 	InsertDateTime time.Time `json:"insert_datetime"` // время вставки
-
-	//order events list
-	Events []OrderEventData `json:"events"`
-}
-
-type OrderEventData struct {
-	EventTime    time.Time `json:"event_time"`
-	DriverUUID   string    `json:"driver_uuid"`
-	OrderUUID    string    `json:"order_uuid"`
-	Publisher    string    `json:"publisher"`
-	OperatorUUID string    `json:"operator_uuid"`
-	State        string    `json:"state"`
-	Comment      string    `json:"comment"`
-
-	//insert datetime
-	InsertDateTime time.Time `json:"insert_datetime"` // время вставки
 }
 
 func main() {
@@ -197,7 +181,6 @@ func main() {
 			ProductsCount:      0,
 			ProductsData:       "",
 			InsertDateTime:     time.Time{},
-			Events:             nil,
 		}
 		//ordersDirPath := "orders"
 		createdYear := strconv.Itoa(createdDatetime.Year())
