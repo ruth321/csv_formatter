@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
@@ -92,9 +93,22 @@ type OrderEventData struct {
 }
 
 func main() {
-	file, err := os.Open("main.csv")
+	fileName := flag.String("n", "main.csv", "file name")
+	fileDir := flag.String("d", "./", "file directory")
+	ordersDirPath := flag.String("sd", "./orders", "saving directory")
+	flag.Parse()
+	var filePath string
+	if (*fileDir)[len(*fileDir)-1] == '/' {
+		filePath = fmt.Sprintf("%s%s", *fileDir, *fileName)
+	} else {
+		filePath = fmt.Sprintf("%s/%s", *fileDir, *fileName)
+	}
+	if (*ordersDirPath)[len(*fileDir)-1] == '/' {
+		*ordersDirPath = removeByIndex(*ordersDirPath, len(*fileDir)-1)
+	}
+	file, err := os.Open(filePath)
 	if err != nil {
-		logrus.WithField("event", "csv file opening").Fatal(err)
+		logrus.WithField("event", "opening csv file").Fatal(err)
 	}
 	r := csv.NewReader(file)
 	csvOrders, err := r.ReadAll()
@@ -131,7 +145,6 @@ func main() {
 		tariffPrice, err := intParser(csvOrders[i][36])
 		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
 		//TODO спросить про Source
-		//TODO спросить про ввод файла
 		//TODO спросить про TariffName и DriverTarrif
 		order = BQOrderRaw{
 			UUID:               csvOrders[i][0], //idx
@@ -139,7 +152,7 @@ func main() {
 			ServiceName:        csvOrders[i][40], //?orderoptionid
 			Features:           csvOrders[i][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
-			Source:             "",
+			Source:             "crm",
 			OrderState:         csvOrders[i][50], //state
 			CancelReason:       "",
 			OrderTakenTime:     orderTakenTime, //appointtime
@@ -182,7 +195,7 @@ func main() {
 			InsertDateTime:     time.Time{},
 			Events:             nil,
 		}
-		ordersDirPath := "orders"
+		//ordersDirPath := "orders"
 		createdYear := strconv.Itoa(createdDatetime.Year())
 		createdMonth := strconv.Itoa(int(createdDatetime.Month()))
 		if int(createdDatetime.Month()) < 10 {
@@ -192,7 +205,7 @@ func main() {
 		if createdDatetime.Day() < 10 {
 			createdDay = "0" + createdDay
 		}
-		savingPath := fmt.Sprintf("%s/%s/%s/%s/", ordersDirPath, createdYear, createdMonth, createdDay)
+		savingPath := fmt.Sprintf("%s/%s/%s/%s/", *ordersDirPath, createdYear, createdMonth, createdDay)
 		err = os.MkdirAll(savingPath, os.ModePerm)
 		if err != nil {
 			logrus.WithField("event", "making directory").Fatal(err)
@@ -201,8 +214,8 @@ func main() {
 		if err != nil {
 			logrus.WithField("event", "encoding json").Fatal(err)
 		}
-		fileName := order.UUID + ".json"
-		err = ioutil.WriteFile(savingPath+fileName, orderFile, os.ModePerm)
+		filePath := order.UUID + ".json"
+		err = ioutil.WriteFile(savingPath+filePath, orderFile, os.ModePerm)
 		if err != nil {
 			logrus.WithField("event", "saving order file").Fatal(err)
 		}
@@ -218,19 +231,19 @@ func timeParser(strTime string) (time.Time, error) {
 	return timeTime, err
 }
 
-func intParser(intStr string) (int, error) {
-	if intStr == "" {
+func intParser(strInt string) (int, error) {
+	if strInt == "" {
 		return 0, nil
 	}
-	intInt, err := strconv.Atoi(intStr)
+	intInt, err := strconv.Atoi(strInt)
 	return intInt, err
 }
 
-func floatParser(floatStr string) (float32, error) {
-	if floatStr == "" {
+func floatParser(strFloat string) (float32, error) {
+	if strFloat == "" {
 		return 0, nil
 	}
-	floatFloat, err := strconv.ParseFloat(floatStr, 32)
+	floatFloat, err := strconv.ParseFloat(strFloat, 32)
 	return float32(floatFloat), err
 }
 
@@ -238,4 +251,10 @@ func errorHandler(err error, jsonField string, event string, csvField string) {
 	if err != nil {
 		logrus.WithFields(logrus.Fields{"json field": jsonField, "event": event, "csv field": csvField}).Fatal(err)
 	}
+}
+
+func removeByIndex(s string, i int) string {
+	c := []rune(s)
+	s = string(append(c[0:i], c[i+1:]...))
+	return s
 }
