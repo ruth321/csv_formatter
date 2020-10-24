@@ -182,7 +182,6 @@ func main() {
 			ProductsData:       "",
 			InsertDateTime:     time.Time{},
 		}
-		//ordersDirPath := "orders"
 		createdYear := strconv.Itoa(createdDatetime.Year())
 		createdMonth := strconv.Itoa(int(createdDatetime.Month()))
 		if int(createdDatetime.Month()) < 10 {
