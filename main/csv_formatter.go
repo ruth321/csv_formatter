@@ -1,11 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"encoding/csv"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/sirupsen/logrus"
+	"io"
 	"io/ioutil"
 	"os"
 	"strconv"
@@ -95,53 +98,64 @@ func main() {
 	if err != nil {
 		logrus.WithField("event", "opening csv file").Fatal(err)
 	}
-	r := csv.NewReader(file)
-	csvOrders, err := r.ReadAll()
-	if err != nil {
-		logrus.WithField("event", "reading from csv reader").Fatal(err)
-	}
-	err = file.Close()
-	if err != nil {
-		logrus.WithField("event", "csv file closing").Fatal(err)
-	}
+	var csvOrders [][]string
+	var csvString string
 	var order BQOrderRaw
-	for i := 1; i < len(csvOrders); i++ {
-		createdDatetime, err := timeParser(csvOrders[i][5])
+	csvString, err = readString(file)
+	if err != nil {
+		logrus.WithField("event", "reading string from csv file").Fatal(err)
+	}
+	for {
+		csvString, err = readString(file)
+		if err != nil {
+			if err == io.EOF {
+				logrus.WithField("event", "file read successfully").Info(err)
+				break
+			}
+			logrus.WithField("event", "reading string from csv file").Fatal(err)
+		}
+		strReader := strings.NewReader(csvString)
+		csvReader := csv.NewReader(strReader)
+		csvOrders, err = csvReader.ReadAll()
+		if err != nil {
+			logrus.WithField("event", "reading from csv reader").Fatal(err)
+		}
+		createdDatetime, err := timeParser(csvOrders[0][5])
 		errorHandler(err, "CreatedDatetime", "time parsing", "createtime")
-		dropoffLon, err := floatParser(csvOrders[i][60])
+		dropoffLon, err := floatParser(csvOrders[0][60])
 		errorHandler(err, "DropoffLon", "float parsing", "longitudeto")
-		dropoffLat, err := floatParser(csvOrders[i][59])
+		dropoffLat, err := floatParser(csvOrders[0][59])
 		errorHandler(err, "DropoffLat", "float parsing", "latitudeto")
-		pickupLon, err := floatParser(csvOrders[i][27])
+		pickupLon, err := floatParser(csvOrders[0][27])
 		errorHandler(err, "PickupLon", "float parsing", "longitude")
-		pickupLat, err := floatParser(csvOrders[i][26])
+		pickupLat, err := floatParser(csvOrders[0][26])
 		errorHandler(err, "PickupLat", "float parsing", "latitude")
-		orderTakenTime, err := timeParser(csvOrders[i][73])
+		orderTakenTime, err := timeParser(csvOrders[0][73])
 		errorHandler(err, "OrderTakenTime", "time parsing", "appointtime")
 		paymentType := "Картой"
-		if csvOrders[i][64] == "f" {
+		if csvOrders[0][64] == "f" {
 			paymentType = "Наличные"
 		}
-		waitingTime, err := intParser(csvOrders[i][16])
+		waitingTime, err := intParser(csvOrders[0][16])
 		errorHandler(err, "WaitingTime", "int parsing", "waiting")
 		waitingTime *= 60
-		dropoffDatetime, err := timeParser(csvOrders[i][79])
+		dropoffDatetime, err := timeParser(csvOrders[0][79])
 		errorHandler(err, "DropoffDatetime", "time parsing", "s_time_stop_taxometr")
-		tariffPrice, err := intParser(csvOrders[i][36])
+		tariffPrice, err := intParser(csvOrders[0][36])
 		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
-		realPrice, err := intParser(csvOrders[i][11])
+		realPrice, err := intParser(csvOrders[0][11])
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
 		//TODO спросить про Source(crm)
 		//TODO спросить про TariffName и DriverTarrif
 		//TODO спросить про файл(читается целиком или по частям)
 		order = BQOrderRaw{
-			UUID:               csvOrders[i][0], //idx
+			UUID:               csvOrders[0][0], //idx
 			RoutesCount:        0,
-			ServiceName:        csvOrders[i][40], //?orderoptionid
-			Features:           csvOrders[i][48], //feauteres
+			ServiceName:        csvOrders[0][40], //?orderoptionid
+			Features:           csvOrders[0][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "crm",
-			OrderState:         csvOrders[i][50], //state
+			OrderState:         csvOrders[0][50], //state
 			CancelReason:       "",
 			OrderTakenTime:     orderTakenTime, //appointtime
 			ArrivalTimeReal:    time.Time{},
@@ -156,12 +170,12 @@ func main() {
 			PickupLat:          pickupLat, //latitude
 			PickupDatetime:     time.Time{},
 			PickupArea:         "",
-			PickupAddress:      csvOrders[i][2], //addressfrom
+			PickupAddress:      csvOrders[0][2], //addressfrom
 			DropoffLon:         dropoffLon,      //longitudeto
 			DropoffLat:         dropoffLat,      //latitudeto
 			DropoffDatetime:    dropoffDatetime, //s_time_stop_taxometr
 			DropoffArea:        "",
-			DropoffAddress:     csvOrders[i][33], //addresstofull
+			DropoffAddress:     csvOrders[0][33], //addresstofull
 			TariffName:         "",
 			TariffPrice:        tariffPrice, //stoimost_tarif
 			RealPrice:          realPrice,   //stoimost
@@ -170,11 +184,11 @@ func main() {
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
 			ClientAllowance:    0,
-			DriverUUID:         csvOrders[i][82], //adriverid
+			DriverUUID:         csvOrders[0][82], //adriverid
 			DriverCar:          "",
 			DriverTarrif:       "",
-			ClientPhone:        csvOrders[i][24], //aclientphone
-			ClientUUID:         csvOrders[i][1],  //clientid
+			ClientPhone:        csvOrders[0][24], //aclientphone
+			ClientUUID:         csvOrders[0][1],  //clientid
 			PaymentType:        paymentType,      //withcardpayment
 			StoreUUID:          "",
 			ProductsSum:        0,
@@ -200,12 +214,30 @@ func main() {
 		if err != nil {
 			logrus.WithField("event", "encoding json").Fatal(err)
 		}
-		filePath := order.UUID + ".json"
-		err = ioutil.WriteFile(savingPath+filePath, orderFile, os.ModePerm)
+		fileName := order.UUID + ".json"
+		err = ioutil.WriteFile(savingPath+fileName, orderFile, os.ModePerm)
 		if err != nil {
 			logrus.WithField("event", "saving order file").Fatal(err)
 		}
+		logrus.WithFields(logrus.Fields{"path": savingPath, "name": fileName}).Info(errors.New("json file saved"))
 	}
+	err = file.Close()
+	if err != nil {
+		logrus.WithField("event", "csv file closing").Fatal(err)
+	}
+}
+
+func readString(file *os.File) (string, error) {
+	reader := bufio.NewReaderSize(file, 4096)
+	bytes, err := reader.ReadBytes('\n')
+	if err != nil {
+		return "", err
+	}
+	_, err = file.Seek(int64(-reader.Buffered()), 1)
+	if err != nil {
+		return "", err
+	}
+	return string(bytes), nil
 }
 
 func timeParser(strTime string) (time.Time, error) {
