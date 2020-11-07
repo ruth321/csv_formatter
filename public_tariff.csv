@@ -1,0 +1,164 @@
+﻿idx,name,descr,descr_short,deleted,prioritet,colorid,code_out,tariff_gridid,maxcredit,cost_order_fix,cost_order_perc,descr_user,modemanualcost,cost_order_min,t_order_weight,hot_order,departmentid,descr_voditel,not_calc_without_gps
+1,Архивный.Удален,"Городской, 13 руб/км, минималка 70 руб",Гор,true,1,null,null,null,null,null,null,null,0,null,0,05,null,null,"Городской, 13 руб/км, минималка 70 руб"
+14,Таксометр,Таксометр,Т,false,1,null,null,null,null,null,null,Таксометр,0,null,0,05,null,null,Таксометр
+15,Таксометр Комфорт,Комфорт,ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,0,05,null,null,Комфорт
+16,Фиксированный,Фиксированный,Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный
+17,Фиксированный Комфорт,Комфорт,ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Комфорт
+20,Курьерская доставка с выходом,null,Дост,false,1,null,null,null,null,null,null,null,1,null,0,05,null,null,null
+21,Курьерская доставка с подъемом на этаж,null,Дост,false,1,null,null,null,null,null,null,null,1,null,0,05,null,null,null
+27,Доставка без выхода,null,Дост,false,1,null,null,null,null,null,null,null,1,null,0,05,null,null,null
+142,Почасовая,"Почасовая 6 руб минута, 180руб минималка",Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,0,05,null,null,"Почасовая 6 руб минута, 180руб минималка"
+143,Свободная не работает,null,null,false,1,null,null,null,null,null,null,null,0,null,0,05,null,null,null
+151,333777,null,Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,0,05,false,null,null
+192,Доставка_Легковая_Город,null,Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,0,05,null,null,null
+194,Доставка_Легковая_Загород,null,Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,0,05,null,null,null
+195,Доставка_Грузовая_город_3_метра,Доставка грузовая 3 метра,Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,0,05,null,null,Доставка грузовая 3 метра
+196,Доставка_Грузовая_город_4_метра,Доставка грузовая 4 метра,Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,0,05,null,null,Доставка грузовая 4 метра
+197,Доставка_Грузовая_город_6_метра,Доставка грузовая 6 метров,Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,0,05,null,null,Доставка грузовая 6 метров
+198,Доставка_Грузовая_загород,Доставка грузовая загород,Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,0,05,null,null,Доставка грузовая загород
+202,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,0,05,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!)
+203,120 VIP Фиксированный ,120 VIP Фиксированный ,120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,0,05,null,null,120 VIP Фиксированный 
+205,Фиксированный_K_1.15,Фиксированный +15%,+15% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +15%
+206,Фиксированный_K_1.25,Фиксированный +25%,+25% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +25%
+207,Фиксированный_K_1.35,Фиксированный +35%,+35% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +35%
+208,Фиксированный_K_1.50,Фиксированный +50%,+50% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +50%
+209,Фиксированный Комфорт_K_1.15,Комфорт +15%,+15% ФК,true,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Комфорт +15%
+210,Фиксированный Комфорт_K_1.25,Комфорт +25%,+25% ФК,true,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Комфорт +25%
+211,Фиксированный Комфорт_K_1.35,Комфорт +35%,+35% ФК,true,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Комфорт +35%
+212,Фиксированный Комфорт_K_1.50,Комфорт +50%,+50% ФК,true,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Комфорт +50%
+213,333777_K_1.15,Фиксированный +15%,+15% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,0,05,false,null,Фиксированный +15%
+214,333777_K_1.25,Фиксированный +25%,+25% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,0,05,false,null,Фиксированный +25%
+215,333777_K_1.35,Фиксированный +35%,+35% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,0,05,false,null,Фиксированный +35%
+216,333777_K_1.50,Фиксированный +50%,+50% Фикс,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,0,05,false,null,Фиксированный +50%
+218,Таксометр_K_1.15,Таксометр +15%,+15% Т,true,1,null,null,null,null,null,null,Таксометр,0,null,0,05,null,null,Таксометр +15%
+219,Таксометр_K_1.25,Таксометр +25%,+25% Т,true,1,null,null,null,null,null,null,Таксометр,0,null,0,05,null,null,Таксометр +25%
+220,Таксометр_K_1.35,Таксометр +35%,+35% Т,true,1,null,null,null,null,null,null,Таксометр,0,null,0,05,null,null,Таксометр +35%
+221,Таксометр_K_1.50,Таксометр +50%,+50% Т,true,1,null,null,null,null,null,null,Таксометр,0,null,0,05,null,null,Таксометр +50%
+222,Таксометр Комфорт_K_1.15,Комфорт +15%,+15% ТК,true,1,null,null,null,null,null,null,Комфорт,0,null,0,05,null,null,Комфорт +15%
+223,Таксометр Комфорт_K_1.25,Комфорт +25%,+25% ТК,true,1,null,null,null,null,null,null,Комфорт,0,null,0,05,null,null,Комфорт +25%
+224,Таксометр Комфорт_K_1.35,Комфорт +35%,+35% ТК,true,1,null,null,null,null,null,null,Комфорт,0,null,0,05,null,null,Комфорт +35%
+225,Таксометр Комфорт_K_1.50,Комфорт +50%,+50% ТК,true,1,null,null,null,null,null,null,Комфорт,0,null,0,05,null,null,Комфорт +50%
+227,Стандарт,Стандарт,Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Стандарт
+229,Фиксированный_Рейтинговый,Фиксированный_Рейтинговый,ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный_Рейтинговый
+230,Фиксированный_Рейтинговый_K_1.15,Фиксированный +15%,+15% ФиксР,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +15%
+231,Фиксированный_Рейтинговый_K_1.25,Фиксированный +25%,+25% ФиксР,true,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,0,05,null,null,Фиксированный +25%
+10 014,K_1.2 Таксометр,K_1.2 Таксометр,K_1.2 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+10 015,K_1.2 Таксометр Комфорт,K_1.2 Комфорт,K_1.2 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+10 016,K_1.2 Фиксированный,K_1.2 Фиксированный,K_1.2 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+10 017,K_1.2 Фиксированный Комфорт,K_1.2 Комфорт,K_1.2 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+10 020,K_1.2 Курьерская доставка с выходом,K_1.2 ,K_1.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+10 021,K_1.2 Курьерская доставка с подъемом на этаж,K_1.2 ,K_1.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+10 027,K_1.2 Доставка без выхода,K_1.2 ,K_1.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+10 142,K_1.2 Почасовая,"K_1.2 Почасовая 6 руб минута, 180руб минималка",K_1.2 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+10 143,K_1.2 Свободная не работает,K_1.2 ,K_1.2 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+10 151,K_1.2 333777,K_1.2 ,K_1.2 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+10 192,K_1.2 Доставка_Легковая_Город,K_1.2 ,K_1.2 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+10 194,K_1.2 Доставка_Легковая_Загород,K_1.2 ,K_1.2 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+10 195,K_1.2 Доставка_Грузовая_город_3_метра,K_1.2 Доставка грузовая 3 метра,K_1.2 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+10 196,K_1.2 Доставка_Грузовая_город_4_метра,K_1.2 Доставка грузовая 4 метра,K_1.2 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+10 197,K_1.2 Доставка_Грузовая_город_6_метра,K_1.2 Доставка грузовая 6 метров,K_1.2 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+10 198,K_1.2 Доставка_Грузовая_загород,K_1.2 Доставка грузовая загород,K_1.2 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+10 202,K_1.2 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.2 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.2 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+10 203,K_1.2 120 VIP Фиксированный ,K_1.2 120 VIP Фиксированный ,K_1.2 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+10 227,K_1.2 Стандарт,K_1.2 Стандарт,K_1.2 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+10 229,K_1.2 Фиксированный_Рейтинговый,K_1.2 Фиксированный_Рейтинговый,K_1.2 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+20 014,K_1.3 Таксометр,K_1.3 Таксометр,K_1.3 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+20 015,K_1.3 Таксометр Комфорт,K_1.3 Комфорт,K_1.3 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+20 016,K_1.3 Фиксированный,K_1.3 Фиксированный,K_1.3 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+20 017,K_1.3 Фиксированный Комфорт,K_1.3 Комфорт,K_1.3 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+20 020,K_1.3 Курьерская доставка с выходом,K_1.3 ,K_1.3 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+20 021,K_1.3 Курьерская доставка с подъемом на этаж,K_1.3 ,K_1.3 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+20 027,K_1.3 Доставка без выхода,K_1.3 ,K_1.3 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+20 142,K_1.3 Почасовая,"K_1.3 Почасовая 6 руб минута, 180руб минималка",K_1.3 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+20 143,K_1.3 Свободная не работает,K_1.3 ,K_1.3 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+20 151,K_1.3 333777,K_1.3 ,K_1.3 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+20 192,K_1.3 Доставка_Легковая_Город,K_1.3 ,K_1.3 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+20 194,K_1.3 Доставка_Легковая_Загород,K_1.3 ,K_1.3 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+20 195,K_1.3 Доставка_Грузовая_город_3_метра,K_1.3 Доставка грузовая 3 метра,K_1.3 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+20 196,K_1.3 Доставка_Грузовая_город_4_метра,K_1.3 Доставка грузовая 4 метра,K_1.3 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+20 197,K_1.3 Доставка_Грузовая_город_6_метра,K_1.3 Доставка грузовая 6 метров,K_1.3 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+20 198,K_1.3 Доставка_Грузовая_загород,K_1.3 Доставка грузовая загород,K_1.3 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+20 202,K_1.3 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.3 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.3 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+20 203,K_1.3 120 VIP Фиксированный ,K_1.3 120 VIP Фиксированный ,K_1.3 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+20 227,K_1.3 Стандарт,K_1.3 Стандарт,K_1.3 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+20 229,K_1.3 Фиксированный_Рейтинговый,K_1.3 Фиксированный_Рейтинговый,K_1.3 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+30 014,K_1.5 Таксометр,K_1.5 Таксометр,K_1.5 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+30 015,K_1.5 Таксометр Комфорт,K_1.5 Комфорт,K_1.5 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+30 016,K_1.5 Фиксированный,K_1.5 Фиксированный,K_1.5 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+30 017,K_1.5 Фиксированный Комфорт,K_1.5 Комфорт,K_1.5 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+30 020,K_1.5 Курьерская доставка с выходом,K_1.5 ,K_1.5 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+30 021,K_1.5 Курьерская доставка с подъемом на этаж,K_1.5 ,K_1.5 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+30 027,K_1.5 Доставка без выхода,K_1.5 ,K_1.5 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+30 142,K_1.5 Почасовая,"K_1.5 Почасовая 6 руб минута, 180руб минималка",K_1.5 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+30 143,K_1.5 Свободная не работает,K_1.5 ,K_1.5 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+30 151,K_1.5 333777,K_1.5 ,K_1.5 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+30 192,K_1.5 Доставка_Легковая_Город,K_1.5 ,K_1.5 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+30 194,K_1.5 Доставка_Легковая_Загород,K_1.5 ,K_1.5 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+30 195,K_1.5 Доставка_Грузовая_город_3_метра,K_1.5 Доставка грузовая 3 метра,K_1.5 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+30 196,K_1.5 Доставка_Грузовая_город_4_метра,K_1.5 Доставка грузовая 4 метра,K_1.5 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+30 197,K_1.5 Доставка_Грузовая_город_6_метра,K_1.5 Доставка грузовая 6 метров,K_1.5 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+30 198,K_1.5 Доставка_Грузовая_загород,K_1.5 Доставка грузовая загород,K_1.5 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+30 202,K_1.5 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.5 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.5 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+30 203,K_1.5 120 VIP Фиксированный ,K_1.5 120 VIP Фиксированный ,K_1.5 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+30 227,K_1.5 Стандарт,K_1.5 Стандарт,K_1.5 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+30 229,K_1.5 Фиксированный_Рейтинговый,K_1.5 Фиксированный_Рейтинговый,K_1.5 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+40 014,K_1.7 Таксометр,K_1.7 Таксометр,K_1.7 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+40 015,K_1.7 Таксометр Комфорт,K_1.7 Комфорт,K_1.7 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+40 016,K_1.7 Фиксированный,K_1.7 Фиксированный,K_1.7 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+40 017,K_1.7 Фиксированный Комфорт,K_1.7 Комфорт,K_1.7 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+40 020,K_1.7 Курьерская доставка с выходом,K_1.7 ,K_1.7 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+40 021,K_1.7 Курьерская доставка с подъемом на этаж,K_1.7 ,K_1.7 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+40 027,K_1.7 Доставка без выхода,K_1.7 ,K_1.7 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+40 142,K_1.7 Почасовая,"K_1.7 Почасовая 6 руб минута, 180руб минималка",K_1.7 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+40 143,K_1.7 Свободная не работает,K_1.7 ,K_1.7 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+40 151,K_1.7 333777,K_1.7 ,K_1.7 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+40 192,K_1.7 Доставка_Легковая_Город,K_1.7 ,K_1.7 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+40 194,K_1.7 Доставка_Легковая_Загород,K_1.7 ,K_1.7 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+40 195,K_1.7 Доставка_Грузовая_город_3_метра,K_1.7 Доставка грузовая 3 метра,K_1.7 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+40 196,K_1.7 Доставка_Грузовая_город_4_метра,K_1.7 Доставка грузовая 4 метра,K_1.7 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+40 197,K_1.7 Доставка_Грузовая_город_6_метра,K_1.7 Доставка грузовая 6 метров,K_1.7 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+40 198,K_1.7 Доставка_Грузовая_загород,K_1.7 Доставка грузовая загород,K_1.7 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+40 202,K_1.7 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.7 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.7 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+40 203,K_1.7 120 VIP Фиксированный ,K_1.7 120 VIP Фиксированный ,K_1.7 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+40 227,K_1.7 Стандарт,K_1.7 Стандарт,K_1.7 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+40 229,K_1.7 Фиксированный_Рейтинговый,K_1.7 Фиксированный_Рейтинговый,K_1.7 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+50 014,K_1.9 Таксометр,K_1.9 Таксометр,K_1.9 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+50 015,K_1.9 Таксометр Комфорт,K_1.9 Комфорт,K_1.9 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+50 016,K_1.9 Фиксированный,K_1.9 Фиксированный,K_1.9 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+50 017,K_1.9 Фиксированный Комфорт,K_1.9 Комфорт,K_1.9 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+50 020,K_1.9 Курьерская доставка с выходом,K_1.9 ,K_1.9 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+50 021,K_1.9 Курьерская доставка с подъемом на этаж,K_1.9 ,K_1.9 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+50 027,K_1.9 Доставка без выхода,K_1.9 ,K_1.9 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+50 142,K_1.9 Почасовая,"K_1.9 Почасовая 6 руб минута, 180руб минималка",K_1.9 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+50 143,K_1.9 Свободная не работает,K_1.9 ,K_1.9 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+50 151,K_1.9 333777,K_1.9 ,K_1.9 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+50 192,K_1.9 Доставка_Легковая_Город,K_1.9 ,K_1.9 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+50 194,K_1.9 Доставка_Легковая_Загород,K_1.9 ,K_1.9 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+50 195,K_1.9 Доставка_Грузовая_город_3_метра,K_1.9 Доставка грузовая 3 метра,K_1.9 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+50 196,K_1.9 Доставка_Грузовая_город_4_метра,K_1.9 Доставка грузовая 4 метра,K_1.9 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+50 197,K_1.9 Доставка_Грузовая_город_6_метра,K_1.9 Доставка грузовая 6 метров,K_1.9 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+50 198,K_1.9 Доставка_Грузовая_загород,K_1.9 Доставка грузовая загород,K_1.9 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+50 202,K_1.9 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.9 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_1.9 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+50 203,K_1.9 120 VIP Фиксированный ,K_1.9 120 VIP Фиксированный ,K_1.9 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+50 227,K_1.9 Стандарт,K_1.9 Стандарт,K_1.9 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+50 229,K_1.9 Фиксированный_Рейтинговый,K_1.9 Фиксированный_Рейтинговый,K_1.9 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+60 014,K_2.2 Таксометр,K_2.2 Таксометр,K_2.2 Т,false,1,null,null,null,null,null,null,Таксометр,0,null,1,false,null,null,null
+60 015,K_2.2 Таксометр Комфорт,K_2.2 Комфорт,K_2.2 ТК,false,1,null,null,null,null,null,null,Комфорт,0,null,1,false,null,null,null
+60 016,K_2.2 Фиксированный,K_2.2 Фиксированный,K_2.2 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+60 017,K_2.2 Фиксированный Комфорт,K_2.2 Комфорт,K_2.2 ФК,false,1,null,null,null,null,null,null,"КОМФОРТ Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+60 020,K_2.2 Курьерская доставка с выходом,K_2.2 ,K_2.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+60 021,K_2.2 Курьерская доставка с подъемом на этаж,K_2.2 ,K_2.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+60 027,K_2.2 Доставка без выхода,K_2.2 ,K_2.2 Дост,false,1,null,null,null,null,null,null,null,1,null,1,false,null,null,null
+60 142,K_2.2 Почасовая,"K_2.2 Почасовая 6 руб минута, 180руб минималка",K_2.2 Поч.,false,1,null,null,null,null,null,null,"Почасовая 6 руб минута, 180руб минималка",0,null,1,false,null,null,null
+60 143,K_2.2 Свободная не работает,K_2.2 ,K_2.2 ,false,1,null,null,null,null,null,null,null,0,null,1,false,null,null,null
+60 151,K_2.2 333777,K_2.2 ,K_2.2 Фикс,false,1 000,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",0,null,1,false,null,null,null
+60 192,K_2.2 Доставка_Легковая_Город,K_2.2 ,K_2.2 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+60 194,K_2.2 Доставка_Легковая_Загород,K_2.2 ,K_2.2 Дост.,false,100,null,null,null,null,null,null,Доставка,1,null,1,false,null,null,null
+60 195,K_2.2 Доставка_Грузовая_город_3_метра,K_2.2 Доставка грузовая 3 метра,K_2.2 Груз.3м.,false,100,null,null,null,null,null,null,Доставка грузовая 3 метра,1,null,1,false,null,null,null
+60 196,K_2.2 Доставка_Грузовая_город_4_метра,K_2.2 Доставка грузовая 4 метра,K_2.2 Груз.4м.,false,100,null,null,null,null,null,null,Доставка грузовая 4 метра,1,null,1,false,null,null,null
+60 197,K_2.2 Доставка_Грузовая_город_6_метра,K_2.2 Доставка грузовая 6 метров,K_2.2 Груз.6м.,false,100,null,null,null,null,null,null,Доставка грузовая 6 метров,1,null,1,false,null,null,null
+60 198,K_2.2 Доставка_Грузовая_загород,K_2.2 Доставка грузовая загород,K_2.2 Груз.3аг.,false,100,null,null,null,null,null,null,Доставка грузовая загород,1,null,1,false,null,null,null
+60 202,K_2.2 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_2.2 Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),K_2.2 Дост.,false,100,null,null,null,null,null,null,Доставка_Супер (ЗАЙТИ В ТОЧКУ И ОПЛАТИТЬ!),1,null,1,false,null,null,null
+60 203,K_2.2 120 VIP Фиксированный ,K_2.2 120 VIP Фиксированный ,K_2.2 120 VIP,false,10 000,9,null,null,null,null,null,120 VIP Фиксированный ,1,null,1,false,null,null,null
+60 227,K_2.2 Стандарт,K_2.2 Стандарт,K_2.2 Фикс,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null
+60 229,K_2.2 Фиксированный_Рейтинговый,K_2.2 Фиксированный_Рейтинговый,K_2.2 ФиксР,false,1,null,null,null,null,null,null,"Фиксированная цена, без учета ожидания и доп. услуг",1,null,1,false,null,null,null

@@ -91,6 +91,16 @@ func main() {
 		logrus.WithField("event", "reading orderoptionid description file").Fatal(err)
 	}
 
+	tariffFile, err := os.Open("public_tariff.csv")
+	if err != nil {
+		logrus.WithField("event", "opening tariffid description file").Fatal(err)
+	}
+	csvReader = csv.NewReader(tariffFile)
+	tariff, err := csvReader.ReadAll()
+	if err != nil {
+		logrus.WithField("event", "reading tariffid description file").Fatal(err)
+	}
+
 	fileName := flag.String("n", "main.csv", "file name")
 	fileDir := flag.String("d", "./", "file directory")
 	ordersDirPath := flag.String("sd", "orders", "saving directory")
@@ -157,6 +167,7 @@ func main() {
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
 		serviceName := serviceNameHandler(csvOrders[0][40], orderoption)
 		cancelReason := cancelReasonHandler(csvOrders[0][7])
+		tariffName := tariffNameHandler(csvOrders[0][34], tariff)
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
@@ -171,14 +182,14 @@ func main() {
 			ServiceName:        serviceName,      //orderoptionid
 			Features:           csvOrders[0][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
-			Source:             "crm",
+			Source:             "crm",            //no similar field
 			OrderState:         csvOrders[0][50], //state
-			CancelReason:       cancelReason,
-			OrderTakenTime:     orderTakenTime, //appointtime
+			CancelReason:       cancelReason,     //completeid
+			OrderTakenTime:     orderTakenTime,   //appointtime
 			ArrivalTimeReal:    time.Time{},
 			ArrivalTimePromise: time.Time{},
-			DistanceToClient:   0,
-			TripDistance:       0,
+			DistanceToClient:   0, //no similar field
+			TripDistance:       0, //no similar field
 			CancelTime:         time.Time{},
 			OwnerUUID:          "",
 			UserStartName:      "",
@@ -193,17 +204,17 @@ func main() {
 			DropoffDatetime:    dropoffDatetime, //s_time_stop_taxometr
 			DropoffArea:        "",
 			DropoffAddress:     csvOrders[0][33], //addresstofull
-			TariffName:         "",
-			TariffPrice:        tariffPrice, //stoimost_tarif
-			RealPrice:          realPrice,   //stoimost
-			WaitingTime:        waitingTime, //waiting
+			TariffName:         tariffName,       //tariffid
+			TariffPrice:        tariffPrice,      //stoimost_tarif
+			RealPrice:          realPrice,        //stoimost
+			WaitingTime:        waitingTime,      //waiting
 			WaitingPrice:       0,
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
 			ClientAllowance:    0,
 			DriverUUID:         csvOrders[0][82], //adriverid
 			DriverCar:          "",
-			DriverTarrif:       "",
+			DriverTarrif:       "",               //no similar field
 			ClientPhone:        csvOrders[0][24], //aclientphone
 			ClientUUID:         csvOrders[0][1],  //clientid
 			PaymentType:        paymentType,      //withcardpayment
@@ -331,6 +342,15 @@ func cancelReasonHandler(completeid string) string {
 		return "Заказ для водителя снят"
 	case "14":
 		return "Передали в такси Россия"
+	}
+	return ""
+}
+
+func tariffNameHandler(tariffid string, tariff [][]string) string {
+	for i := 1; i < len(tariff); i++ {
+		if tariffid == tariff[i][0] {
+			return tariff[i][1]
+		}
 	}
 	return ""
 }
