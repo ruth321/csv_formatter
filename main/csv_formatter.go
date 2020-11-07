@@ -156,6 +156,7 @@ func main() {
 		realPrice, err := intParser(csvOrders[0][11])
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
 		serviceName := serviceNameHandler(csvOrders[0][40], orderoption)
+		cancelReason := cancelReasonHandler(csvOrders[0][7])
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
@@ -172,7 +173,7 @@ func main() {
 			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "crm",
 			OrderState:         csvOrders[0][50], //state
-			CancelReason:       "",
+			CancelReason:       cancelReason,
 			OrderTakenTime:     orderTakenTime, //appointtime
 			ArrivalTimeReal:    time.Time{},
 			ArrivalTimePromise: time.Time{},
@@ -302,6 +303,34 @@ func serviceNameHandler(orderoptionid string, orderoption [][]string) string {
 		if orderoptionid == orderoption[i][0] {
 			return orderoption[i][1]
 		}
+	}
+	return ""
+}
+
+func cancelReasonHandler(completeid string) string {
+	switch completeid {
+	case "4":
+		return "Ложный вызов"
+	case "5":
+		return "Заказ сняли"
+	case "6":
+		return "Нет свободных автомобилей"
+	case "7":
+		return "Телефон не доступен"
+	case "8":
+		return "Телефон не отвечает"
+	case "9":
+		return "Телефон занят"
+	case "10":
+		return "Телефон не верный"
+	case "11":
+		return "По вине клиента"
+	case "12":
+		return "По вине водителя"
+	case "13":
+		return "Заказ для водителя снят"
+	case "14":
+		return "Передали в такси Россия"
 	}
 	return ""
 }
