@@ -81,6 +81,16 @@ type BQOrderRaw struct {
 }
 
 func main() {
+	orderoptionFile, err := os.Open("public_orderoption.csv")
+	if err != nil {
+		logrus.WithField("event", "opening orderoptionid description file").Fatal(err)
+	}
+	csvReader := csv.NewReader(orderoptionFile)
+	orderoption, err := csvReader.ReadAll()
+	if err != nil {
+		logrus.WithField("event", "reading orderoptionid description file").Fatal(err)
+	}
+
 	fileName := flag.String("n", "main.csv", "file name")
 	fileDir := flag.String("d", "./", "file directory")
 	ordersDirPath := flag.String("sd", "orders", "saving directory")
@@ -145,6 +155,7 @@ func main() {
 		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
 		realPrice, err := intParser(csvOrders[0][11])
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
+		serviceName := serviceNameHandler(csvOrders[0][40], orderoption)
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
@@ -152,10 +163,11 @@ func main() {
 		//TODO спросить про пустые поля PickupArea и DropoffArea на Google Диске
 		//TODO спросить, что значат BonusPayment, GuaranteedIncome, ClientAllowance, InsertDateTime
 		//TODO спросить, нужно ли выводить логи сохранения файлов
+		//TODO спросить, можно ли брать описание различных id из файлов
 		order = BQOrderRaw{
 			UUID:               csvOrders[0][0], //idx
 			RoutesCount:        0,
-			ServiceName:        csvOrders[0][40], //?orderoptionid
+			ServiceName:        serviceName,      //orderoptionid
 			Features:           csvOrders[0][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
 			Source:             "crm",
@@ -283,4 +295,13 @@ func removeCharByIndex(s string, i int) string {
 	c := []rune(s)
 	s = string(append(c[0:i], c[i+1:]...))
 	return s
+}
+
+func serviceNameHandler(orderoptionid string, orderoption [][]string) string {
+	for i := 1; i < len(orderoption); i++ {
+		if orderoptionid == orderoption[i][0] {
+			return orderoption[i][1]
+		}
+	}
+	return ""
 }

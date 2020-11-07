@@ -1,0 +1,79 @@
+﻿idx,name,manualnotify,useforweb,deleted,altoptionid,alter_idx,vip,altoptionuserinfo,descruser,departmentid
+1,Таксометр,false,false,false,null,1,null,null,null,null
+3,Таксометр Комфорт,false,false,false,null,1,null,null,null,null
+4,Фиксированный,false,false,false,null,1,null,null,null,null
+5,Фиксированный Комфорт,false,false,false,null,1,null,null,null,null
+6,Почасовой,false,true,true,null,null,null,null,null,null
+7,Почасовой Комфорт,false,false,true,null,null,null,null,null,null
+8,Курьерская доставка с выходом,false,false,false,null,1,null,null,null,null
+9,Курьерская доставка с подъемом на этаж,false,false,false,null,1,null,null,null,null
+10,Доставка без выхода,false,false,false,null,1,null,null,null,null
+11,Таксометр Альянс,false,false,false,null,null,null,null,null,null
+12,Таксометр Комфорт Альянс,false,false,false,null,null,null,null,null,null
+13,Фиксированный Альянс,false,false,false,null,null,null,null,null,null
+14,Фиксированный Комфорт Альянс,false,false,false,null,null,null,null,null,null
+17,Курьерская доставка с выходом Альянс,false,false,false,null,null,null,null,null,null
+18,Курьерская доставка с подъемом на этаж Альянс,false,false,false,null,null,null,null,null,null
+19,Доставка без выхода Альянс,false,false,false,null,null,null,null,null,null
+20,Таксометр Сити,false,false,true,null,null,null,null,null,null
+21,Таксометр Комфорт Сити,false,false,true,null,null,null,null,null,null
+22,Фиксированный Сити,false,false,true,null,null,null,null,null,null
+23,Фиксированный Комфорт Сити,false,false,true,null,null,null,null,null,null
+24,Курьерская доставка с выходом Сити,false,false,true,null,null,null,null,null,null
+25,Курьерская доставка с подъемом на этаж Сити,false,false,true,null,null,null,null,null,null
+26,Доставка без выхода Сити,false,false,true,null,null,null,null,null,null
+27,Таксометр Лайф,false,false,true,null,null,null,null,null,null
+28,Таксометр Комфорт Лайф,false,false,true,null,null,null,null,null,null
+29,Фиксированный Лайф,false,false,true,null,null,null,null,null,null
+30,Фиксированный Комфорт Лайф,false,false,true,null,null,null,null,null,null
+31,Курьерская доставка с выходом Лайф,false,false,true,null,null,null,null,null,null
+32,Курьерская доставка с подъемом на этаж Лайф,false,false,true,null,null,null,null,null,null
+33,Доставка без выхода Лайф,false,false,true,null,null,null,null,null,null
+34,Таксометр Позитив,false,false,false,null,null,null,null,null,null
+35,Таксометр Комфорт Позитив,false,false,false,null,null,null,null,null,null
+36,Фиксированный Позитив,false,false,false,null,null,null,null,null,null
+37,Фиксированный Комфорт Позитив,false,false,false,null,null,null,null,null,null
+38,Курьерская доставка с выходом Позитив,false,false,false,null,null,null,null,null,null
+39,Курьерская доставка с подъемом на этаж Позитив,false,false,false,null,null,null,null,null,null
+40,Доставка без выхода Позитив,false,false,false,null,null,null,null,null,null
+41,Таксометр Титан,false,false,true,null,null,null,null,null,null
+42,Таксометр Комфорт Титан,false,false,true,null,null,null,null,null,null
+43,Фиксированный Титан,false,false,true,null,null,null,null,null,null
+44,Фиксированный Комфорт Титан,false,false,true,null,null,null,null,null,null
+45,Курьерская доставка с выходом Титан,false,false,true,null,null,null,null,null,null
+46,Курьерская доставка с подъемом на этаж Титан,false,false,true,null,null,null,null,null,null
+47,Доставка без выхода Титан,false,false,true,null,null,null,null,null,null
+48,Почасовая,false,true,false,null,1,null,null,null,null
+49,Почасовая Альянс,false,false,false,null,null,null,null,null,null
+50,Почасовая Позитив,false,false,false,null,null,null,null,null,null
+51,Почасовая Лайф,false,false,true,null,null,null,null,null,null
+52,Почасовая Сити,false,false,true,null,null,null,null,null,null
+53,Почасовая Титан,false,false,true,null,null,null,null,null,null
+54,Таксометр Лайт,false,false,false,null,null,null,null,null,null
+55,Таксометр Комфорт Лайт,false,false,false,null,null,null,null,null,null
+56,Фиксированный Лайт,false,false,false,null,null,null,null,null,null
+57,Фиксированный Комфорт Лайт,false,false,false,null,null,null,null,null,null
+58,Курьерская доставка с выходом Lite,false,false,false,null,null,null,null,null,null
+59,Курьерская доставка с подъемом на этаж Lite,false,false,false,null,null,null,null,null,null
+60,Почасовая Lite,false,false,false,null,null,null,null,null,null
+61,Доставка без выхода Lite,false,false,false,null,null,null,null,null,null
+62,Таксометр Орион Нальчик,false,true,true,null,null,null,null,null,null
+63,Фиксированный Орион Нальчик,false,false,true,null,null,null,null,null,null
+64,VIP Таксометр Повышенный,false,false,true,null,null,true,null,null,null
+65,VIP Фиксированный Повышенный,false,false,true,null,null,true,null,null,null
+66,Таксометр Россия Нальчик,false,true,true,null,null,null,null,null,null
+67,Фиксированный Россия Нальчик,false,false,true,null,null,null,null,null,null
+68,333777,false,false,false,null,null,null,null,null,null
+69,Таксометр*,false,true,true,null,1,true,null,null,null
+70,Фиксированный*,false,false,true,null,1,true,null,null,null
+71,Фиксированный(Оплата бонусами),false,false,true,null,1,true,null,null,null
+72,Доставка легковая,false,false,false,null,null,null,null,null,null
+73,Доставка грузовая 3м,false,false,false,null,null,null,null,null,null
+74,Доставка грузовая 4м,false,false,false,null,null,null,null,null,null
+75,Доставка грузовая 6м,false,false,false,null,null,null,null,null,null
+79,Доставка супер,false,false,false,null,1,false,null,null,null
+80,Фиксированный Аэропорт Беслан,false,false,false,null,1,null,null,null,null
+81,120 VIP,false,false,false,null,1,null,null,null,null
+83,Эконом,false,true,false,null,1,null,null,null,null
+84,Комфорт,false,true,false,null,1,null,null,null,null
+85,Фиксированный_Рейтинговый,false,false,false,null,1,null,null,null,null
