@@ -145,8 +145,6 @@ func main() {
 		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
 		realPrice, err := intParser(csvOrders[0][11])
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
-		//TODO спросить про Source(crm)
-		//TODO спросить про TariffName и DriverTarrif
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
