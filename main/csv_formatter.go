@@ -147,7 +147,13 @@ func main() {
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
 		//TODO спросить про Source(crm)
 		//TODO спросить про TariffName и DriverTarrif
-		//TODO спросить про файл(читается целиком или по частям)
+		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
+		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
+		//TODO спросить, нужно ли преобразовать значения из state
+		//TODO спросить, что значат OwnerUUID, UserStartName, UserStartUUID(описание: тип оплаты)
+		//TODO спросить про пустые поля PickupArea и DropoffArea на Google Диске
+		//TODO спросить, что значат BonusPayment, GuaranteedIncome, ClientAllowance, InsertDateTime
+		//TODO спросить, нужно ли выводить логи сохранения файлов
 		order = BQOrderRaw{
 			UUID:               csvOrders[0][0], //idx
 			RoutesCount:        0,
