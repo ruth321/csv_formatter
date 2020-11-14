@@ -100,7 +100,6 @@ func main() {
 	if err != nil {
 		logrus.WithField("event", "reading tariffid description file").Fatal(err)
 	}
-
 	fileName := flag.String("n", "main.csv", "file name")
 	fileDir := flag.String("d", "./", "file directory")
 	ordersDirPath := flag.String("sd", "orders", "saving directory")
@@ -125,6 +124,22 @@ func main() {
 	if err != nil {
 		logrus.WithField("event", "reading string from csv file").Fatal(err)
 	}
+	var strReader *strings.Reader
+	var createdDatetime time.Time
+	var pickupLon, pickupLat, dropoffLon, dropoffLat float32
+	var pickupDatetime, dropoffDatetime time.Time
+	var orderTakenTime time.Time
+	var paymentType string
+	var waitingTime int
+	var tariffPrice, realPrice int
+	var serviceName string
+	var cancelReason string
+	var tariffName string
+	var dropoffAddress string
+	var routesCount int
+	var createdYear, createdMonth, createdDay string
+	var savingPath, jsonFileName string
+	var orderFile []byte
 	for {
 		csvString, err = readString(file)
 		if err != nil {
@@ -134,44 +149,44 @@ func main() {
 			}
 			logrus.WithField("event", "reading string from csv file").Fatal(err)
 		}
-		strReader := strings.NewReader(csvString)
-		csvReader := csv.NewReader(strReader)
+		strReader = strings.NewReader(csvString)
+		csvReader = csv.NewReader(strReader)
 		csvOrders, err = csvReader.ReadAll()
 		if err != nil {
 			logrus.WithField("event", "reading from csv reader").Fatal(err)
 		}
-		createdDatetime, err := timeParser(csvOrders[0][5])
+		createdDatetime, err = timeParser(csvOrders[0][5])
 		errorHandler(err, "CreatedDatetime", "time parsing", "createtime")
-		dropoffLon, err := floatParser(csvOrders[0][60])
+		dropoffLon, err = floatParser(csvOrders[0][60])
 		errorHandler(err, "DropoffLon", "float parsing", "longitudeto")
-		dropoffLat, err := floatParser(csvOrders[0][59])
+		dropoffLat, err = floatParser(csvOrders[0][59])
 		errorHandler(err, "DropoffLat", "float parsing", "latitudeto")
-		pickupLon, err := floatParser(csvOrders[0][27])
+		pickupLon, err = floatParser(csvOrders[0][27])
 		errorHandler(err, "PickupLon", "float parsing", "longitude")
-		pickupLat, err := floatParser(csvOrders[0][26])
+		pickupLat, err = floatParser(csvOrders[0][26])
 		errorHandler(err, "PickupLat", "float parsing", "latitude")
-		orderTakenTime, err := timeParser(csvOrders[0][73])
+		orderTakenTime, err = timeParser(csvOrders[0][73])
 		errorHandler(err, "OrderTakenTime", "time parsing", "appointtime")
-		paymentType := "Картой"
-		if csvOrders[0][64] == "f" {
-			paymentType = "Наличные"
+		paymentType = "Наличные"
+		if csvOrders[0][64] == "t" {
+			paymentType = "Картой"
 		}
-		waitingTime, err := intParser(csvOrders[0][16])
+		waitingTime, err = intParser(csvOrders[0][16])
 		errorHandler(err, "WaitingTime", "int parsing", "waiting")
 		waitingTime *= 60
-		dropoffDatetime, err := timeParser(csvOrders[0][79])
+		dropoffDatetime, err = timeParser(csvOrders[0][79])
 		errorHandler(err, "DropoffDatetime", "time parsing", "s_time_stop_taxometr")
-		tariffPrice, err := intParser(csvOrders[0][36])
+		tariffPrice, err = intParser(csvOrders[0][36])
 		errorHandler(err, "TariffPrice", "int parsing", "stoimost_tarif")
-		realPrice, err := intParser(csvOrders[0][11])
+		realPrice, err = intParser(csvOrders[0][11])
 		errorHandler(err, "RealPrice", "int parsing", "stoimost")
-		serviceName := serviceNameHandler(csvOrders[0][40], orderoption)
-		cancelReason := cancelReasonHandler(csvOrders[0][7])
-		tariffName := tariffNameHandler(csvOrders[0][34], tariff)
-		pickupDatetime, err := timeParser(csvOrders[0][75])
+		serviceName = serviceNameHandler(csvOrders[0][40], orderoption)
+		cancelReason = cancelReasonHandler(csvOrders[0][7])
+		tariffName = tariffNameHandler(csvOrders[0][34], tariff)
+		pickupDatetime, err = timeParser(csvOrders[0][75])
 		errorHandler(err, "PickupDatetime", "time parsing", "pickuptime")
-		dropoffAddress := addressHandler(csvOrders[0][33])
-		routesCount := routesCountHandler(csvOrders[0][4])
+		dropoffAddress = addressHandler(csvOrders[0][33])
+		routesCount = routesCountHandler(csvOrders[0][4])
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
@@ -211,7 +226,7 @@ func main() {
 			TariffName:         tariffName,     //tariffid
 			TariffPrice:        tariffPrice,    //stoimost_tarif
 			RealPrice:          realPrice,      //stoimost
-			WaitingTime:        waitingTime,    //waiting
+			WaitingTime:        waitingTime,    //?waiting
 			WaitingPrice:       0,
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
@@ -228,30 +243,30 @@ func main() {
 			ProductsData:       "",
 			InsertDateTime:     time.Time{},
 		}
-		createdYear := strconv.Itoa(createdDatetime.Year())
-		createdMonth := strconv.Itoa(int(createdDatetime.Month()))
+		createdYear = strconv.Itoa(createdDatetime.Year())
+		createdMonth = strconv.Itoa(int(createdDatetime.Month()))
 		if int(createdDatetime.Month()) < 10 {
 			createdMonth = "0" + createdMonth
 		}
-		createdDay := strconv.Itoa(createdDatetime.Day())
+		createdDay = strconv.Itoa(createdDatetime.Day())
 		if createdDatetime.Day() < 10 {
 			createdDay = "0" + createdDay
 		}
-		savingPath := fmt.Sprintf("%s/%s/%s/%s/", *ordersDirPath, createdYear, createdMonth, createdDay)
+		savingPath = fmt.Sprintf("%s/%s/%s/%s/", *ordersDirPath, createdYear, createdMonth, createdDay)
 		err = os.MkdirAll(savingPath, os.ModePerm)
 		if err != nil {
 			logrus.WithField("event", "making directory").Fatal(err)
 		}
-		orderFile, err := json.Marshal(order)
+		orderFile, err = json.Marshal(order)
 		if err != nil {
 			logrus.WithField("event", "encoding json").Fatal(err)
 		}
-		fileName := order.UUID + ".json"
-		err = ioutil.WriteFile(savingPath+fileName, orderFile, os.ModePerm)
+		jsonFileName = order.UUID + ".json"
+		err = ioutil.WriteFile(savingPath+jsonFileName, orderFile, os.ModePerm)
 		if err != nil {
 			logrus.WithField("event", "saving order file").Fatal(err)
 		}
-		logrus.WithFields(logrus.Fields{"path": savingPath, "name": fileName}).Info(errors.New("json file saved"))
+		logrus.WithFields(logrus.Fields{"path": savingPath, "name": jsonFileName}).Info(errors.New("json file saved"))
 	}
 	err = file.Close()
 	if err != nil {
