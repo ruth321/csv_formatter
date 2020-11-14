@@ -168,6 +168,10 @@ func main() {
 		serviceName := serviceNameHandler(csvOrders[0][40], orderoption)
 		cancelReason := cancelReasonHandler(csvOrders[0][7])
 		tariffName := tariffNameHandler(csvOrders[0][34], tariff)
+		pickupDatetime, err := timeParser(csvOrders[0][75])
+		errorHandler(err, "PickupDatetime", "time parsing", "pickuptime")
+		dropoffAddress := addressHandler(csvOrders[0][33])
+		routesCount := routesCountHandler(csvOrders[0][4])
 		//TODO спросить про json псевдонимы(не соответствуют названиям полей из Google Диск)
 		//TODO спросить про описание ArrivalTimePromise(тип time, а в описании секунды)
 		//TODO спросить, нужно ли преобразовать значения из state
@@ -177,12 +181,12 @@ func main() {
 		//TODO спросить, нужно ли выводить логи сохранения файлов
 		//TODO спросить, можно ли брать описание различных id из файлов
 		order = BQOrderRaw{
-			UUID:               csvOrders[0][0], //idx
-			RoutesCount:        0,
+			UUID:               csvOrders[0][0],  //idx
+			RoutesCount:        routesCount,      //addressto
 			ServiceName:        serviceName,      //orderoptionid
 			Features:           csvOrders[0][48], //feauteres
 			CreatedDatetime:    createdDatetime,  //createtime
-			Source:             "crm",
+			Source:             "crm",            //no similar field
 			OrderState:         csvOrders[0][50], //state
 			CancelReason:       cancelReason,     //completeid
 			OrderTakenTime:     orderTakenTime,   //appointtime
@@ -194,20 +198,20 @@ func main() {
 			OwnerUUID:          "",
 			UserStartName:      "",
 			UserStartUUID:      "",
-			PickupLon:          pickupLon, //longitude
-			PickupLat:          pickupLat, //latitude
-			PickupDatetime:     time.Time{},
+			PickupLon:          pickupLon,      //longitude
+			PickupLat:          pickupLat,      //latitude
+			PickupDatetime:     pickupDatetime, //pickuptime
 			PickupArea:         "",
 			PickupAddress:      csvOrders[0][2], //addressfrom
 			DropoffLon:         dropoffLon,      //longitudeto
 			DropoffLat:         dropoffLat,      //latitudeto
 			DropoffDatetime:    dropoffDatetime, //s_time_stop_taxometr
 			DropoffArea:        "",
-			DropoffAddress:     csvOrders[0][33], //addresstofull
-			TariffName:         tariffName,       //tariffid
-			TariffPrice:        tariffPrice,      //stoimost_tarif
-			RealPrice:          realPrice,        //stoimost
-			WaitingTime:        waitingTime,      //waiting
+			DropoffAddress:     dropoffAddress, //addresstofull
+			TariffName:         tariffName,     //tariffid
+			TariffPrice:        tariffPrice,    //stoimost_tarif
+			RealPrice:          realPrice,      //stoimost
+			WaitingTime:        waitingTime,    //waiting
 			WaitingPrice:       0,
 			BonusPayment:       0,
 			GuaranteedIncome:   0,
@@ -353,4 +357,14 @@ func tariffNameHandler(tariffid string, tariff [][]string) string {
 		}
 	}
 	return ""
+}
+
+func addressHandler(address string) string {
+	addresses := strings.Split(address, " -> ")
+	return addresses[len(addresses)-1]
+}
+
+func routesCountHandler(address string) int {
+	routesCount := len(strings.Split(address, " -> ")) + 1
+	return routesCount
 }
